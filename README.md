@@ -16,7 +16,7 @@ NKJMultiMovieCaptureView higher requires Xcode 5, targeting either iOS 7.1 and a
 ### CocoaPods
 
 ```
-pod "NKJMovieComposer"
+pod "NKJMultiMovieCaptureView"
 ```
 
 
