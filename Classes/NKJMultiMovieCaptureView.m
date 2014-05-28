@@ -11,7 +11,7 @@
 
 
 
-@interface NKJMultiMovieCaptureView () <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate, AVCaptureAudioDataOutputSampleBufferDelegate>
+@interface NKJMultiMovieCaptureView () <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate>
 
 @property BOOL touching;
 @property AVCaptureSession *captureSession;
@@ -224,21 +224,6 @@
         CFRelease(formatDescription);
     });
 }
-
-- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections
-{
-    NSLog(@"didStartRecordingToOutputFileAtURL");
-}
-
-
-- (void)              captureOutput:(AVCaptureFileOutput *)captureOutput
-didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
-                    fromConnections:(NSArray *)connections
-                              error:(NSError *)error
-{
-    NSLog(@"captureOutput:didFinishRecordingToOutputFileAtURL: %@", [outputFileURL path]);
-}
-
 
 #pragma mark - Touch Events
 
