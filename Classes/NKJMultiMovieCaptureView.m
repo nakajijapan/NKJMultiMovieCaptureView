@@ -278,8 +278,11 @@
 
     // Record
     NSLog(@"[Starting to record]");
-    [self.assetWriter startWriting];
-    [self.assetWriter startSessionAtSourceTime:self.recordStartTime];
+    dispatch_async(self.movieWritingQueue, ^{
+        [self.assetWriter startWriting];
+        [self.assetWriter startSessionAtSourceTime:self.recordStartTime];
+    });
+
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
