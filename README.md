@@ -1,10 +1,18 @@
 # NKJMultiMovieCaptureView
 
-[![Version](https://img.shields.io/cocoapods/v/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoadocs.org/docsets/NKJMultiMovieCaptureView)
-[![License](https://img.shields.io/cocoapods/l/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoadocs.org/docsets/NKJMultiMovieCaptureView)
-[![Platform](https://img.shields.io/cocoapods/p/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoadocs.org/docsets/NKJMultiMovieCaptureView)
+[![Version](https://img.shields.io/cocoapods/v/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoapods.org/pods/NKJMultiMovieCaptureView)
+[![License](https://img.shields.io/cocoapods/l/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoapods.org/pods/NKJMultiMovieCaptureView)
+[![Platform](https://img.shields.io/cocoapods/p/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoapods.org/pods/NKJMultiMovieCaptureView)
 
 NKJMultiMovieCaptureView is CaptureSessionView for saving videos while touching the screen.
+
+
+## Usage
+
+```swift
+NKJMultiMovieCaptureView *previewView = [[NKJMultiMovieCaptureView alloc] initWithFrame:CGRectMake(0, 20, 320, 320)];
+[self.view addSubview:self.previewView];
+```
 
 ## Requirements
 
@@ -15,17 +23,11 @@ NKJMultiMovieCaptureView higher requires Xcode 5, targeting either iOS 7.1 and a
 
 ## Installation
 
-### CocoaPods
+NKJMultiMovieCaptureView is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
 
-```
+```ruby
 pod "NKJMultiMovieCaptureView"
-```
-
-## Usage
-
-```obj-c
-NKJMultiMovieCaptureView *previewView = [[NKJMultiMovieCaptureView alloc] initWithFrame:CGRectMake(0, 20, 320, 320)];
-[self.view addSubview:self.previewView];
 ```
 
 ## Author
@@ -35,4 +37,3 @@ nakajijapan, pp.kupepo.gattyanmo@gmail.com
 ## License
 
 NKJMultiMovieCaptureView is available under the MIT license. See the LICENSE file for more info.
-

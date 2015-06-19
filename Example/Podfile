@@ -1,12 +1,12 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, "6.0"
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
-target "NKJMultiMovieCaptureViewDemo" do
-  pod 'NKJMultiMovieCaptureView', path: '../'
-  pod 'NKJMovieComposer'
+target 'NKJMultiMovieCaptureView_Example', :exclusive => true do
+  pod "NKJMultiMovieCaptureView", :path => "../"
 end
 
-target "NKJMultiMovieCaptureViewDemoTests" do
+target 'NKJMultiMovieCaptureView_Tests', :exclusive => true do
+  pod "NKJMultiMovieCaptureView", :path => "../"
 
+  
 end
-
