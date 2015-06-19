@@ -16,6 +16,7 @@
 		A7E015EAF62F1BAB4BA6EA49 /* Pods_NKJMultiMovieCaptureView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AAD95A0C489AA69B1F5255D /* Pods_NKJMultiMovieCaptureView_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CE76CC26983F92555B3478DB /* Pods_NKJMultiMovieCaptureView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F033FCF3E41BFEFDDC3EAAE /* Pods_NKJMultiMovieCaptureView_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DC03283F1B33F7230001423E /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03283E1B33F7230001423E /* LoadingImageView.swift */; };
+		DC0328411B33F7EB0001423E /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0328401B33F7EB0001423E /* ConfirmViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		76D973F1E9A6E2EAA5250B36 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		780A2A07051E8BB2295862F2 /* Pods-NKJMultiMovieCaptureView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NKJMultiMovieCaptureView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NKJMultiMovieCaptureView_Tests/Pods-NKJMultiMovieCaptureView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DC03283E1B33F7230001423E /* LoadingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
+		DC0328401B33F7EB0001423E /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		F64A984B4F0F44F49F58A0B3 /* NKJMultiMovieCaptureView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NKJMultiMovieCaptureView.podspec; path = ../NKJMultiMovieCaptureView.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				DC0328401B33F7EB0001423E /* ConfirmViewController.swift */,
 			);
 			name = "Example for NKJMultiMovieCaptureView";
 			path = NKJMultiMovieCaptureView;
@@ -364,6 +367,7 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				DC03283F1B33F7230001423E /* LoadingImageView.swift in Sources */,
+				DC0328411B33F7EB0001423E /* ConfirmViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
