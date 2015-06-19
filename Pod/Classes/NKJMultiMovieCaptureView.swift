@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreFoundation
 import AVFoundation
 import AudioToolbox
 
@@ -140,6 +141,159 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
 
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Public Method
+    
+    public func setVideoSettingWithDictionary(settings: Dictionary<NSObject, AnyObject>) {
+        for keyName in settings.keys {
+            self.videoSettings[keyName] = settings[keyName]
+        }
+    }
+
+    public func setAudioSettingWithDictionary(settings: Dictionary<NSObject, AnyObject>) {
+        for keyName in settings.keys {
+            self.audioSettings[keyName] = settings[keyName]
+        }
+    }
+    
+    // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate
+    
+    public func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+    
+        if CMSampleBufferDataIsReady(sampleBuffer) == 0 {
+            println("sampleBuffer data is not ready")
+        }
+        
+        let currentTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+        
+        if self.touching {
+
+            if captureOutput.isKindOfClass(AVCaptureVideoDataOutput.self) { // video
+                self.addSamplebuffer(sampleBuffer, assetWriterInput: self.assetWriterInputVideo as AVAssetWriterInput)
+            } else if captureOutput.isKindOfClass(AVCaptureAudioDataOutput.self) { // audio
+                self.addSamplebuffer(sampleBuffer, assetWriterInput: self.assetWriterInputAudio as AVAssetWriterInput)
+            }
+            
+        }
+        
+        self.recordStartTime = currentTime;
+    }
+    
+    func addSamplebuffer(sampleBuffer: CMSampleBufferRef, assetWriterInput: AVAssetWriterInput) {
+
+        var formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
+
+        //CFRetain(sampleBuffer);
+        //CFRetain(formatDescription);
+        dispatch_async(self.movieWritingQueue!) { () -> Void in
+            
+            if !assetWriterInput.readyForMoreMediaData {
+                println("Not ready for data")
+            }
+            
+            if self.assetWriter?.status == AVAssetWriterStatus.Unknown {
+                println("AVAssetWriterStatus.Unknown")
+            }
+            
+
+            if self.assetWriter?.status == AVAssetWriterStatus.Writing {
+                println("AVAssetWriterStatus.Writing")
+                
+                if assetWriterInput.readyForMoreMediaData {
+
+                    if !assetWriterInput.appendSampleBuffer(sampleBuffer) {
+                        println("\(self.assetWriter?.error)");
+                    }
+                    
+                }
+
+            } else if self.assetWriter?.status == AVAssetWriterStatus.Failed {
+                println("AVAssetWriterStatus.Failed")
+            } else if self.assetWriter?.status == AVAssetWriterStatus.Cancelled {
+                println("AVAssetWriterStatus.Cancelled")
+            } else if self.assetWriter?.status == AVAssetWriterStatus.Completed {
+                println("AVAssetWriterStatus.Completed")
+            }
+            
+            //CFRelease(sampleBuffer);
+            //CFRelease(formatDescription);
+            
+        }
+        
+    }
+
+    // MARK: - Touch Events
+    override public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        self.touching = true
+        
+        var error:NSError? = nil
+        let fileName = String(format: "output%02d.mov", arguments: [self.movieURLs.count + 1])
+        let outputPath = NSTemporaryDirectory().stringByAppendingString(fileName)
+        self.outputURL = NSURL(fileURLWithPath: outputPath)
+        println("outputPath = \(outputPath)")
+        
+        // delete file before save the one
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(outputPath) {
+            
+            if !fileManager.removeItemAtPath(outputPath, error:&error) {
+                println("failed deleting file")
+            }
+        }
+        
+        // AVAssetWriter
+        self.assetWriter = AVAssetWriter(URL: self.outputURL, fileType: AVFileTypeQuickTimeMovie, error: &error)
+        if error != nil {
+            println("creation of assetWriter resulting in a non-nil error")
+        }
+        
+        // movie
+        self.assetWriterInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: self.videoSettings)
+        self.assetWriterInputVideo.expectsMediaDataInRealTime = true
+        if self.assetWriterInputVideo == nil {
+            println("assetWriterInputVideo is nil")
+        }
+        
+        // audio
+        self.assetWriterInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: self.audioSettings)
+        self.assetWriterInputAudio.expectsMediaDataInRealTime = true
+        if self.assetWriterInputAudio == nil {
+            println("assetWriterInputAudio is nil")
+        }
+        
+        self.assetWriter?.addInput(self.assetWriterInputVideo)
+        self.assetWriter?.addInput(self.assetWriterInputAudio)
+        
+        // queue
+        self.movieWritingQueue = dispatch_queue_create("Movie Writing Queue", DISPATCH_QUEUE_SERIAL)
+
+        // record
+        println("[starting to record]")
+        dispatch_async(self.movieWritingQueue!, { () -> Void in
+            self.assetWriter?.startWriting()
+            self.assetWriter?.startSessionAtSourceTime(self.recordStartTime)
+        })
+    }
+    
+    public override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        self.touching = false
+        
+        println("[stopping recording] duration :\(CMTimeGetSeconds(self.recordStartTime))")
+        
+        self.assetWriterInputVideo.markAsFinished()
+        self.assetWriterInputAudio.markAsFinished()
+        self.assetWriter?.endSessionAtSourceTime(self.recordStartTime)
+        self.assetWriter?.finishWritingWithCompletionHandler({ () -> Void in
+
+            println("self.assetWriter finishWritingWithCompletionHandler")
+            self.movieURLs.append(self.outputURL!)
+            println("\(self.outputURL)")
+        })
+        
+        println("export done")
     }
 
 }
