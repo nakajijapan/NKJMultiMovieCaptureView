@@ -8,21 +8,14 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "NKJMultiMovieCaptureView"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of NKJMultiMovieCaptureView."
-  s.description      = <<-DESC
-                       An optional longer description of NKJMultiMovieCaptureView
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
-                       DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/NKJMultiMovieCaptureView"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "nakajijapan" => "pp.kupepo.gattyanmo@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/NKJMultiMovieCaptureView.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.name                  = "NKJMultiMovieCaptureView"
+  s.version               = "1.0.0"
+  s.summary               = "NKJMultiMovieCaptureView can store multiple videos while touching the screen"
+  s.homepage              = "http://github.com/nakajijapan"
+  s.license               = 'MIT'
+  s.author                = { "nakajijapan" => "pp.kupepo.gattyanmo@gmail.com" }
+  s.source                = { :git => "https://github.com/nakajijapan/NKJMultiMovieCaptureView.git", :tag => s.version.to_s }
+  s.social_media_url      = 'https://twitter.com/nakajijapan'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
@@ -32,7 +25,5 @@ Pod::Spec.new do |s|
     'NKJMultiMovieCaptureView' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'AVFoundation', 'CoreMedia'
 end
