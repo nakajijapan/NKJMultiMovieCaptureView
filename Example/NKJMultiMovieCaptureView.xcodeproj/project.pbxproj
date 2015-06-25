@@ -17,6 +17,9 @@
 		CE76CC26983F92555B3478DB /* Pods_NKJMultiMovieCaptureView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F033FCF3E41BFEFDDC3EAAE /* Pods_NKJMultiMovieCaptureView_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DC03283F1B33F7230001423E /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03283E1B33F7230001423E /* LoadingImageView.swift */; };
 		DC0328411B33F7EB0001423E /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0328401B33F7EB0001423E /* ConfirmViewController.swift */; };
+		DCB7CF4D1B3AF8FB00BE70FC /* NKJMovieComposer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB7CF4B1B3AF8FB00BE70FC /* NKJMovieComposer.framework */; };
+		DCB7CF4E1B3AF8FB00BE70FC /* NKJMultiMovieCaptureView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB7CF4C1B3AF8FB00BE70FC /* NKJMultiMovieCaptureView.framework */; };
+		DCF060321B3C5D5C00BE5CC2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF060311B3C5D5C00BE5CC2 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +53,10 @@
 		780A2A07051E8BB2295862F2 /* Pods-NKJMultiMovieCaptureView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NKJMultiMovieCaptureView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NKJMultiMovieCaptureView_Tests/Pods-NKJMultiMovieCaptureView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DC03283E1B33F7230001423E /* LoadingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		DC0328401B33F7EB0001423E /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
-		DC850D6E1B3AF0BD00F7E2F3 /* NKJMovieComposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NKJMovieComposer.framework; path = "Pods/../build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Example/NKJMovieComposer.framework"; sourceTree = "<group>"; };
-		DC850D701B3AF2D100F7E2F3 /* NKJMovieComposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NKJMovieComposer.framework; path = "Pods/../build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Example/NKJMovieComposer.framework"; sourceTree = "<group>"; };
+		DCB7CF491B3AF8F100BE70FC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DCB7CF4B1B3AF8FB00BE70FC /* NKJMovieComposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NKJMovieComposer.framework; path = "Pods/../build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Example/NKJMovieComposer.framework"; sourceTree = "<group>"; };
+		DCB7CF4C1B3AF8FB00BE70FC /* NKJMultiMovieCaptureView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NKJMultiMovieCaptureView.framework; path = "Pods/../build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Tests/NKJMultiMovieCaptureView.framework"; sourceTree = "<group>"; };
+		DCF060311B3C5D5C00BE5CC2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		F64A984B4F0F44F49F58A0B3 /* NKJMultiMovieCaptureView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NKJMultiMovieCaptureView.podspec; path = ../NKJMultiMovieCaptureView.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +65,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCF060321B3C5D5C00BE5CC2 /* AssetsLibrary.framework in Frameworks */,
+				DCB7CF4D1B3AF8FB00BE70FC /* NKJMovieComposer.framework in Frameworks */,
+				DCB7CF4E1B3AF8FB00BE70FC /* NKJMultiMovieCaptureView.framework in Frameworks */,
 				A7E015EAF62F1BAB4BA6EA49 /* Pods_NKJMultiMovieCaptureView_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,8 +86,10 @@
 		51EFB3E3D876A4567FD4AE28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DC850D701B3AF2D100F7E2F3 /* NKJMovieComposer.framework */,
-				DC850D6E1B3AF0BD00F7E2F3 /* NKJMovieComposer.framework */,
+				DCF060311B3C5D5C00BE5CC2 /* AssetsLibrary.framework */,
+				DCB7CF4B1B3AF8FB00BE70FC /* NKJMovieComposer.framework */,
+				DCB7CF4C1B3AF8FB00BE70FC /* NKJMultiMovieCaptureView.framework */,
+				DCB7CF491B3AF8F100BE70FC /* AVFoundation.framework */,
 				0AAD95A0C489AA69B1F5255D /* Pods_NKJMultiMovieCaptureView_Example.framework */,
 				6F033FCF3E41BFEFDDC3EAAE /* Pods_NKJMultiMovieCaptureView_Tests.framework */,
 			);
@@ -503,6 +513,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Example",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Tests",
 				);
 				INFOPLIST_FILE = NKJMultiMovieCaptureView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -519,6 +530,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Example",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods-NKJMultiMovieCaptureView_Tests",
 				);
 				INFOPLIST_FILE = NKJMultiMovieCaptureView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
