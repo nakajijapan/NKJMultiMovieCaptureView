@@ -184,9 +184,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
 
         var formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
 
-        //CFRetain(sampleBuffer);
-        //CFRetain(formatDescription);
-
         dispatch_async(self.movieWritingQueue!) { () -> Void in
             
             if !assetWriterInput.readyForMoreMediaData {
@@ -216,9 +213,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
                 println("AVAssetWriterStatus.Completed")
             }
             
-            //CFRelease(sampleBuffer);
-            //CFRelease(formatDescription);
-            
         }
         
     }
@@ -232,7 +226,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         let fileName = String(format: "output%02d.mov", arguments: [self.movieURLs.count + 1])
         let outputPath = NSTemporaryDirectory().stringByAppendingString(fileName)
         self.outputURL = NSURL(fileURLWithPath: outputPath)
-        //println("outputPath = \(outputPath)")
         
         // delete file before save the one
         let fileManager = NSFileManager.defaultManager()
@@ -281,7 +274,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         self.touching = false
         
         //println("[stopping recording] duration :\(CMTimeGetSeconds(self.recordStartTime))")
-        
         self.assetWriterInputVideo.markAsFinished()
         self.assetWriterInputAudio.markAsFinished()
         self.assetWriter?.endSessionAtSourceTime(self.recordStartTime)
