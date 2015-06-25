@@ -186,6 +186,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
 
         //CFRetain(sampleBuffer);
         //CFRetain(formatDescription);
+
         dispatch_async(self.movieWritingQueue!) { () -> Void in
             
             if !assetWriterInput.readyForMoreMediaData {
@@ -195,10 +196,9 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             if self.assetWriter?.status == AVAssetWriterStatus.Unknown {
                 println("AVAssetWriterStatus.Unknown")
             }
-            
 
             if self.assetWriter?.status == AVAssetWriterStatus.Writing {
-                println("AVAssetWriterStatus.Writing")
+                //println("AVAssetWriterStatus.Writing")
                 
                 if assetWriterInput.readyForMoreMediaData {
 
@@ -232,7 +232,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         let fileName = String(format: "output%02d.mov", arguments: [self.movieURLs.count + 1])
         let outputPath = NSTemporaryDirectory().stringByAppendingString(fileName)
         self.outputURL = NSURL(fileURLWithPath: outputPath)
-        println("outputPath = \(outputPath)")
+        //println("outputPath = \(outputPath)")
         
         // delete file before save the one
         let fileManager = NSFileManager.defaultManager()
@@ -270,7 +270,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         self.movieWritingQueue = dispatch_queue_create("Movie Writing Queue", DISPATCH_QUEUE_SERIAL)
 
         // record
-        println("[starting to record]")
         dispatch_async(self.movieWritingQueue!, { () -> Void in
             self.assetWriter?.startWriting()
             self.assetWriter?.startSessionAtSourceTime(self.recordStartTime)
@@ -281,19 +280,18 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         
         self.touching = false
         
-        println("[stopping recording] duration :\(CMTimeGetSeconds(self.recordStartTime))")
+        //println("[stopping recording] duration :\(CMTimeGetSeconds(self.recordStartTime))")
         
         self.assetWriterInputVideo.markAsFinished()
         self.assetWriterInputAudio.markAsFinished()
         self.assetWriter?.endSessionAtSourceTime(self.recordStartTime)
         self.assetWriter?.finishWritingWithCompletionHandler({ () -> Void in
 
-            println("self.assetWriter finishWritingWithCompletionHandler")
+            //println("self.assetWriter finishWritingWithCompletionHandler")
             self.movieURLs.append(self.outputURL!)
-            println("\(self.outputURL)")
+            //println("\(self.outputURL)")
         })
         
-        println("export done")
     }
 
 }
