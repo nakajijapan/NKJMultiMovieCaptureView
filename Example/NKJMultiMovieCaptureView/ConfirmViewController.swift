@@ -11,26 +11,33 @@ import MediaPlayer
 
 class ConfirmViewController: UIViewController, MPMediaPickerControllerDelegate {
 
+    var moviePlayerController:MPMoviePlayerController!
+    var appDelegate:AppDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        println("composedMoviePath = \(self.appDelegate.composedMoviePath)")
+        
+        if self.appDelegate.composedMoviePath == nil {
+            println("No, Composed File.")
+            return
+        }
+        
+        let movieURL = NSURL(fileURLWithPath: self.appDelegate.composedMoviePath!)
+        
+        self.moviePlayerController = MPMoviePlayerController(contentURL: movieURL)
+        self.moviePlayerController.controlStyle = MPMovieControlStyle.Embedded
+        self.moviePlayerController.scalingMode = MPMovieScalingMode.AspectFit
+        
+        self.moviePlayerController.shouldAutoplay = false
+        self.moviePlayerController.view.backgroundColor = UIColor.lightGrayColor()
+        self.moviePlayerController.view.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds))
+        self.moviePlayerController.prepareToPlay()
+        
+        self.view.addSubview(self.moviePlayerController.view)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
