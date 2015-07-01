@@ -10,8 +10,10 @@ NKJMultiMovieCaptureView is CaptureSessionView for saving videos while touching 
 ## Usage
 
 ```swift
-NKJMultiMovieCaptureView *previewView = [[NKJMultiMovieCaptureView alloc] initWithFrame:CGRectMake(0, 20, 320, 320)];
-[self.view addSubview:self.previewView];
+let previewView = NKJMultiMovieCaptureView(
+frame: CGRectMake(0, 20, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds))
+)
+self.view.addSubview(previewView)
 ```
 
 ## Requirements
