@@ -24,8 +24,8 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     var captureVideoOutput:AVCaptureVideoDataOutput!
     var captureAudioOutput:AVCaptureAudioDataOutput!
     
-    var videoSettings = [NSObject : AnyObject]()
-    var audioSettings = [NSObject : AnyObject]()
+    var videoSettings = [String : AnyObject]()
+    var audioSettings = [String : AnyObject]()
     
     var recordStartTime = kCMTimeZero
     var outputURL:NSURL?
@@ -44,26 +44,26 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         var videoInput: AVCaptureDeviceInput!
         do {
             videoInput = try AVCaptureDeviceInput(device: device)
-        } catch var error as NSError {
+        } catch let error as NSError {
             videoInput = nil
-            fatalError("error: \(error!.localizedDescription)")
+            fatalError(error.localizedDescription)
         }
 
-        var videoOutput = AVCaptureVideoDataOutput()
+        let videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: dispatch_get_main_queue())
-        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_32BGRA]
+        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey: NSNumber(unsignedInt: kCVPixelFormatType_32BGRA)]
 
         // audio
-        var audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        let audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
         var audioInput: AVCaptureDeviceInput!
         do {
             audioInput = try AVCaptureDeviceInput(device: audioCaptureDevice)
-        } catch var error as NSError {
+        } catch let error as NSError {
             audioInput = nil
-            fatalError("error: \(error!.localizedDescription)")
+            fatalError(error.localizedDescription)
         }
 
-        var audioOutput = AVCaptureAudioDataOutput()
+        let audioOutput = AVCaptureAudioDataOutput()
         audioOutput.setSampleBufferDelegate(self, queue: dispatch_get_main_queue())
 
         // setting camera
@@ -117,7 +117,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
         // display size
-        var rootLayer = self.layer
+        let rootLayer = self.layer
         rootLayer.masksToBounds = true
         self.previewLayer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
         rootLayer.addSublayer(self.previewLayer)
@@ -140,11 +140,12 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             AVSampleRateKey: 44100.0,
             AVNumberOfChannelsKey: 2,
             AVLinearPCMBitDepthKey: 16,
-            AVFormatIDKey: kAudioFormatLinearPCM,
+            AVFormatIDKey: Int(kAudioFormatLinearPCM),
             AVLinearPCMIsFloatKey: false,
             AVLinearPCMIsBigEndianKey: false,
             AVLinearPCMIsNonInterleaved: false,
-            AVChannelLayoutKey: NSData()
+            //AVChannelLayoutKey: NSDate()
+
         ]
         
     }
@@ -155,15 +156,15 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
 
     // MARK: - Public Method
     
-    public func setVideoSettingWithDictionary(settings: Dictionary<NSObject, AnyObject>) {
+    public func setVideoSettingWithDictionary(settings: [String: AnyObject]) {
         for keyName in settings.keys {
-            self.videoSettings[keyName] = settings[keyName]
+            self.videoSettings[keyName as String] = settings[keyName]
         }
     }
 
-    public func setAudioSettingWithDictionary(settings: Dictionary<NSObject, AnyObject>) {
+    public func setAudioSettingWithDictionary(settings: [String: AnyObject]) {
         for keyName in settings.keys {
-            self.audioSettings[keyName] = settings[keyName]
+            self.audioSettings[keyName as String] = settings[keyName]
         }
     }
     
@@ -171,7 +172,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     
     public func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
     
-        if CMSampleBufferDataIsReady(sampleBuffer) == 0 {
+        if CMSampleBufferDataIsReady(sampleBuffer) == false {
             print("sampleBuffer data is not ready")
         }
         
@@ -192,7 +193,8 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     
     func addSamplebuffer(sampleBuffer: CMSampleBufferRef, assetWriterInput: AVAssetWriterInput) {
 
-        var formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
+        //var formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
+        _ = CMSampleBufferGetFormatDescription(sampleBuffer)
 
         dispatch_async(self.movieWritingQueue!) { () -> Void in
             
@@ -250,7 +252,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         // AVAssetWriter
         do {
 
-            self.assetWriter = try AVAssetWriter(URL: self.outputURL, fileType: AVFileTypeQuickTimeMovie)
+            self.assetWriter = try AVAssetWriter(URL: self.outputURL!, fileType: AVFileTypeQuickTimeMovie)
         } catch let error as NSError {
             self.assetWriter = nil
             print("creation of assetWriter resulting in a non-nil error ((\(error.localizedDescription)))")
