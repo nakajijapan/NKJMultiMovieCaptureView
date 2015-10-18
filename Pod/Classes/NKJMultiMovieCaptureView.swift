@@ -41,18 +41,28 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
         // video
-        var error:NSError?
-        var videoInput = AVCaptureDeviceInput(device: device, error: &error)
-        if error != nil {
+        var videoInput: AVCaptureDeviceInput!
+        do {
+            videoInput = try AVCaptureDeviceInput(device: device)
+        } catch var error as NSError {
+            videoInput = nil
             fatalError("error: \(error!.localizedDescription)")
         }
+
         var videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: dispatch_get_main_queue())
         videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_32BGRA]
 
         // audio
         var audioCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-        var audioInput = AVCaptureDeviceInput(device: audioCaptureDevice, error: &error)
+        var audioInput: AVCaptureDeviceInput!
+        do {
+            audioInput = try AVCaptureDeviceInput(device: audioCaptureDevice)
+        } catch var error as NSError {
+            audioInput = nil
+            fatalError("error: \(error!.localizedDescription)")
+        }
+
         var audioOutput = AVCaptureAudioDataOutput()
         audioOutput.setSampleBufferDelegate(self, queue: dispatch_get_main_queue())
 
@@ -66,7 +76,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
 
                 for port in captureConnection.inputPorts {
                     
-                    println("\(port)")
+                    print("\(port)")
                     if let inputPort = port as? AVCaptureInputPort {
                         
                         if inputPort.mediaType == AVMediaTypeVideo {
@@ -139,7 +149,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -162,7 +172,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     public func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
     
         if CMSampleBufferDataIsReady(sampleBuffer) == 0 {
-            println("sampleBuffer data is not ready")
+            print("sampleBuffer data is not ready")
         }
         
         let currentTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
@@ -187,11 +197,11 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         dispatch_async(self.movieWritingQueue!) { () -> Void in
             
             if !assetWriterInput.readyForMoreMediaData {
-                println("Not ready for data")
+                print("Not ready for data")
             }
             
             if self.assetWriter?.status == AVAssetWriterStatus.Unknown {
-                println("AVAssetWriterStatus.Unknown")
+                print("AVAssetWriterStatus.Unknown")
             }
 
             if self.assetWriter?.status == AVAssetWriterStatus.Writing {
@@ -200,17 +210,17 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
                 if assetWriterInput.readyForMoreMediaData {
 
                     if !assetWriterInput.appendSampleBuffer(sampleBuffer) {
-                        println("\(self.assetWriter?.error)");
+                        print("\(self.assetWriter?.error)");
                     }
                     
                 }
 
             } else if self.assetWriter?.status == AVAssetWriterStatus.Failed {
-                println("AVAssetWriterStatus.Failed")
+                print("AVAssetWriterStatus.Failed")
             } else if self.assetWriter?.status == AVAssetWriterStatus.Cancelled {
-                println("AVAssetWriterStatus.Cancelled")
+                print("AVAssetWriterStatus.Cancelled")
             } else if self.assetWriter?.status == AVAssetWriterStatus.Completed {
-                println("AVAssetWriterStatus.Completed")
+                print("AVAssetWriterStatus.Completed")
             }
             
         }
@@ -218,11 +228,10 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     }
 
     // MARK: - Touch Events
-    override public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.touching = true
         
-        var error:NSError? = nil
         let fileName = String(format: "output%02d.mov", arguments: [self.movieURLs.count + 1])
         let outputPath = NSTemporaryDirectory().stringByAppendingString(fileName)
         self.outputURL = NSURL(fileURLWithPath: outputPath)
@@ -231,29 +240,34 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(outputPath) {
             
-            if !fileManager.removeItemAtPath(outputPath, error:&error) {
-                println("failed deleting file")
+            do {
+                try fileManager.removeItemAtPath(outputPath)
+            } catch let error as NSError {
+                print("failed deleting file (\(error.localizedDescription))")
             }
         }
-        
+
         // AVAssetWriter
-        self.assetWriter = AVAssetWriter(URL: self.outputURL, fileType: AVFileTypeQuickTimeMovie, error: &error)
-        if error != nil {
-            println("creation of assetWriter resulting in a non-nil error")
+        do {
+
+            self.assetWriter = try AVAssetWriter(URL: self.outputURL, fileType: AVFileTypeQuickTimeMovie)
+        } catch let error as NSError {
+            self.assetWriter = nil
+            print("creation of assetWriter resulting in a non-nil error ((\(error.localizedDescription)))")
         }
         
         // movie
         self.assetWriterInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: self.videoSettings)
         self.assetWriterInputVideo.expectsMediaDataInRealTime = true
         if self.assetWriterInputVideo == nil {
-            println("assetWriterInputVideo is nil")
+            print("assetWriterInputVideo is nil")
         }
         
         // audio
         self.assetWriterInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: self.audioSettings)
         self.assetWriterInputAudio.expectsMediaDataInRealTime = true
         if self.assetWriterInputAudio == nil {
-            println("assetWriterInputAudio is nil")
+            print("assetWriterInputAudio is nil")
         }
         
         self.assetWriter?.addInput(self.assetWriterInputVideo)
@@ -269,7 +283,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         })
     }
     
-    public override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.touching = false
         
