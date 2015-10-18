@@ -136,6 +136,11 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             AVVideoCompressionPropertiesKey: [AVVideoMaxKeyFrameIntervalKey: 30]
         ]
         
+        // set up the channel layout
+        var channelLayout = AudioChannelLayout()
+        memset(&channelLayout, 0, sizeof(AudioChannelLayout));
+        channelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Stereo;
+        
         self.audioSettings = [
             AVSampleRateKey: 44100.0,
             AVNumberOfChannelsKey: 2,
@@ -144,7 +149,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             AVLinearPCMIsFloatKey: false,
             AVLinearPCMIsBigEndianKey: false,
             AVLinearPCMIsNonInterleaved: false,
-            //AVChannelLayoutKey: NSDate()
+            AVChannelLayoutKey: NSData(bytes:&channelLayout, length:sizeof(AudioChannelLayout)),
 
         ]
         
@@ -289,15 +294,15 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         
         self.touching = false
         
-        //println("[stopping recording] duration :\(CMTimeGetSeconds(self.recordStartTime))")
+        //print("[stopping recording] duration :\(CMTimeGetSeconds(self.recordStartTime))")
         self.assetWriterInputVideo.markAsFinished()
         self.assetWriterInputAudio.markAsFinished()
         self.assetWriter?.endSessionAtSourceTime(self.recordStartTime)
         self.assetWriter?.finishWritingWithCompletionHandler({ () -> Void in
 
-            //println("self.assetWriter finishWritingWithCompletionHandler")
+            //print("self.assetWriter finishWritingWithCompletionHandler")
             self.movieURLs.append(self.outputURL!)
-            //println("\(self.outputURL)")
+            //print("\(self.outputURL)")
         })
         
     }
