@@ -24,8 +24,8 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     var captureVideoOutput:AVCaptureVideoDataOutput!
     var captureAudioOutput:AVCaptureAudioDataOutput!
     
-    var videoSettings = [String : AnyObject]()
-    var audioSettings = [String : AnyObject]()
+    var videoSettings = [String : Any]()
+    var audioSettings = [String : Any]()
     
     var recordStartTime = kCMTimeZero
     var outputURL:NSURL?
@@ -136,11 +136,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             AVVideoCompressionPropertiesKey: [AVVideoMaxKeyFrameIntervalKey: 30]
         ]
         
-        // set up the channel layout
-        var channelLayout = AudioChannelLayout()
-        memset(&channelLayout, 0, sizeof(AudioChannelLayout));
-        channelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Stereo;
-        
         self.audioSettings = [
             AVSampleRateKey: 44100.0,
             AVNumberOfChannelsKey: 2,
@@ -149,8 +144,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             AVLinearPCMIsFloatKey: false,
             AVLinearPCMIsBigEndianKey: false,
             AVLinearPCMIsNonInterleaved: false,
-            AVChannelLayoutKey: NSData(bytes:&channelLayout, length:sizeof(AudioChannelLayout)),
-
+            AVChannelLayoutKey: NSData()
         ]
         
     }
@@ -158,16 +152,16 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Public Method
     
-    public func setVideoSettingWithDictionary(settings: [String: AnyObject]) {
+    public func setVideoSettingWithDictionary(settings: [String: Any]) {
         for keyName in settings.keys {
             self.videoSettings[keyName as String] = settings[keyName]
         }
     }
 
-    public func setAudioSettingWithDictionary(settings: [String: AnyObject]) {
+    public func setAudioSettingWithDictionary(settings: [String: Any]) {
         for keyName in settings.keys {
             self.audioSettings[keyName as String] = settings[keyName]
         }
@@ -180,7 +174,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         if CMSampleBufferDataIsReady(sampleBuffer) == false {
             print("sampleBuffer data is not ready")
         }
-        
+
         let currentTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         
         if self.touching {
@@ -212,7 +206,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
             }
 
             if self.assetWriter?.status == AVAssetWriterStatus.Writing {
-                //println("AVAssetWriterStatus.Writing")
+                //print("AVAssetWriterStatus.Writing")
                 
                 if assetWriterInput.readyForMoreMediaData {
 
@@ -256,7 +250,6 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
 
         // AVAssetWriter
         do {
-
             self.assetWriter = try AVAssetWriter(URL: self.outputURL!, fileType: AVFileTypeQuickTimeMovie)
         } catch let error as NSError {
             self.assetWriter = nil
@@ -264,14 +257,14 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         }
         
         // movie
-        self.assetWriterInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: self.videoSettings)
+        self.assetWriterInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: self.videoSettings as? [String:AnyObject])
         self.assetWriterInputVideo.expectsMediaDataInRealTime = true
         if self.assetWriterInputVideo == nil {
             print("assetWriterInputVideo is nil")
         }
         
         // audio
-        self.assetWriterInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: self.audioSettings)
+        self.assetWriterInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: self.audioSettings as? [String:AnyObject])
         self.assetWriterInputAudio.expectsMediaDataInRealTime = true
         if self.assetWriterInputAudio == nil {
             print("assetWriterInputAudio is nil")
@@ -287,6 +280,7 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         dispatch_async(self.movieWritingQueue!, { () -> Void in
             self.assetWriter?.startWriting()
             self.assetWriter?.startSessionAtSourceTime(self.recordStartTime)
+
         })
     }
     
