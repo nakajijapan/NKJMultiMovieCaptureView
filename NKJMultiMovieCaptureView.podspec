@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name                  = "NKJMultiMovieCaptureView"
-  s.version               = "1.0.0"
+  s.version               = "1.1.0"
   s.summary               = "NKJMultiMovieCaptureView can store multiple videos while touching the screen"
   s.homepage              = "http://github.com/nakajijapan"
   s.license               = 'MIT'
