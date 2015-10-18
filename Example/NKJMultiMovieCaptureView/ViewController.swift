@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         self.previewView = NKJMultiMovieCaptureView(frame: CGRectMake(0, 20, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds)))
         self.view.addSubview(self.previewView)
   
-        var saveButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        let saveButton = UIButton(type: .Custom)
         saveButton.frame = CGRectMake(16, CGRectGetWidth(self.view.bounds) + 32, 120, 50)
         saveButton.setTitle("SAVE FILE", forState: UIControlState.Normal)
         saveButton.backgroundColor = UIColor.redColor()
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
     // MARK - Composite Video
     
     func saveComposedVideo() {
-        println("self.previewView.movieURLs = \(self.previewView.movieURLs)")
+        print("self.previewView.movieURLs = \(self.previewView.movieURLs)")
 
         if self.previewView.movieURLs.count < 1 {
             let alertController = UIAlertController(title: "Ooops", message: "no, movie file", preferredStyle: UIAlertControllerStyle.Alert)
@@ -72,14 +72,14 @@ class ViewController: UIViewController {
                 style: UIAlertActionStyle.Cancel,
                 handler:{
                     (action:UIAlertAction!) -> Void in
-                    println("OK")
+                    print("OK")
             })
             alertController.addAction(cancelAction)
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
         
-        var movieComposition = NKJMovieComposer()
+        let movieComposition = NKJMovieComposer()
         movieComposition.videoComposition.renderSize = CGSize(width: 720, height: 720)
         
         var layerInstruction:AVMutableVideoCompositionLayerInstruction?
@@ -110,17 +110,17 @@ class ViewController: UIViewController {
         self.assetExportSession.exportAsynchronouslyWithCompletionHandler { () -> Void in
             
             if self.assetExportSession.status == AVAssetExportSessionStatus.Completed {
-                println("export session completed")
+                print("export session completed")
                 
                 // save to device
                 let library = ALAssetsLibrary()
                 
-                if library.videoAtPathIsCompatibleWithSavedPhotosAlbum(composedMovieURL!) {
+                if library.videoAtPathIsCompatibleWithSavedPhotosAlbum(composedMovieURL) {
                     library.writeVideoAtPathToSavedPhotosAlbum(composedMovieURL, completionBlock: { (assetUrl, error) -> Void in
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             
                             if error != nil {
-                                println("\(error.description)")
+                                print("\(error.description)")
                             }
                             
                             self.loadingView?.stop()
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
                                 style: UIAlertActionStyle.Cancel,
                                 handler:{
                                     (action:UIAlertAction!) -> Void in
-                                    println("OK")
+                                    print("OK")
                                     
                                     let viewController = ConfirmViewController()
                                     self.navigationController?.pushViewController(viewController, animated: true)
@@ -144,7 +144,7 @@ class ViewController: UIViewController {
                 
                 
             } else {
-                println("export session error")
+                print("export session error")
             }
             
             

@@ -19,10 +19,10 @@ class ConfirmViewController: UIViewController, MPMediaPickerControllerDelegate {
 
         self.view.backgroundColor = UIColor.whiteColor()
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        println("composedMoviePath = \(self.appDelegate.composedMoviePath)")
+        print("composedMoviePath = \(self.appDelegate.composedMoviePath)")
         
         if self.appDelegate.composedMoviePath == nil {
-            println("No, Composed File.")
+            print("No, Composed File.")
             return
         }
         
