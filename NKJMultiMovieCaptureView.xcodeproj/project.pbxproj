@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DC0E41681C314D520090AC94 /* NKJMultiMovieCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E41671C314D520090AC94 /* NKJMultiMovieCaptureView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC0E416E1C314D9F0090AC94 /* NKJMultiMovieCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E41541C314B960090AC94 /* NKJMultiMovieCaptureView.swift */; };
-		DC0E41811C314E9A0090AC94 /* NKJMovieComposer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E417C1C314E5B0090AC94 /* NKJMovieComposer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -59,8 +58,6 @@
 		DC0E41671C314D520090AC94 /* NKJMultiMovieCaptureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NKJMultiMovieCaptureView.h; sourceTree = "<group>"; };
 		DC0E41691C314D520090AC94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NKJMovieComposer.xcodeproj; path = Carthage/Checkouts/NKJMovieComposer/NKJMovieComposer.xcodeproj; sourceTree = "<group>"; };
-		DCB7CF491B3AF8F100BE70FC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		DCF060311B3C5D5C00BE5CC2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC0E41811C314E9A0090AC94 /* NKJMovieComposer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,8 +74,6 @@
 		51EFB3E3D876A4567FD4AE28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DCF060311B3C5D5C00BE5CC2 /* AssetsLibrary.framework */,
-				DCB7CF491B3AF8F100BE70FC /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
