@@ -21,4 +21,5 @@ DerivedData
 
 Example/Podfile.lock
 Pods
-*.xcworkspace
+
+Carthage/Build

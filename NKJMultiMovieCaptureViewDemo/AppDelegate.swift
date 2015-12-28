@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  NKJMultiMovieCaptureView
+//  NKJMultiMovieCaptureViewDemo
 //
-//  Created by nakajijapan on 06/19/2015.
-//  Copyright (c) 06/19/2015 nakajijapan. All rights reserved.
+//  Created by nakajijapan on 2015/12/28.
+//  Copyright © 2015年 nakajijapan. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var composedMoviePath: String?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

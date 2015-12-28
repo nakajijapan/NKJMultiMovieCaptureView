@@ -24,8 +24,8 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     var captureVideoOutput:AVCaptureVideoDataOutput!
     var captureAudioOutput:AVCaptureAudioDataOutput!
     
-    var videoSettings = [String : Any]()
-    var audioSettings = [String : Any]()
+    var videoSettings = [String: AnyObject]()
+    var audioSettings = [String: AnyObject]()
     
     var recordStartTime = kCMTimeZero
     var outputURL:NSURL?
@@ -155,13 +155,13 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
     
     // MARK: - Public Method
     
-    public func setVideoSettingWithDictionary(settings: [String: Any]) {
+    public func setVideoSettingWithDictionary(settings: [String: AnyObject]) {
         for keyName in settings.keys {
             self.videoSettings[keyName as String] = settings[keyName]
         }
     }
 
-    public func setAudioSettingWithDictionary(settings: [String: Any]) {
+    public func setAudioSettingWithDictionary(settings: [String: AnyObject]) {
         for keyName in settings.keys {
             self.audioSettings[keyName as String] = settings[keyName]
         }
@@ -257,14 +257,14 @@ public class NKJMultiMovieCaptureView: UIView, AVCaptureVideoDataOutputSampleBuf
         }
         
         // movie
-        self.assetWriterInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: self.videoSettings as? [String:AnyObject])
+        self.assetWriterInputVideo = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: self.videoSettings)
         self.assetWriterInputVideo.expectsMediaDataInRealTime = true
         if self.assetWriterInputVideo == nil {
             print("assetWriterInputVideo is nil")
         }
         
         // audio
-        self.assetWriterInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: self.audioSettings as? [String:AnyObject])
+        self.assetWriterInputAudio = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: self.audioSettings)
         self.assetWriterInputAudio.expectsMediaDataInRealTime = true
         if self.assetWriterInputAudio == nil {
             print("assetWriterInputAudio is nil")
