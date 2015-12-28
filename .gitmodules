@@ -1,3 +1,4 @@
 [submodule "Carthage/Checkouts/NKJMovieComposer"]
 	path = Carthage/Checkouts/NKJMovieComposer
 	url = https://github.com/nakajijapan/NKJMovieComposer.git
+    ignore = dirty
