@@ -23,30 +23,6 @@
 		};
 /* End PBXBuildRule section */
 
-/* Begin PBXContainerItemProxy section */
-		DC0E417B1C314E5B0090AC94 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC79DE321C30F67B001C598B;
-			remoteInfo = "NKJMovieComposer-iOS";
-		};
-		DC0E417D1C314E5B0090AC94 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC79DE761C3104A0001C598B;
-			remoteInfo = NKJMovieComposerTests;
-		};
-		DC0E417F1C314E5B0090AC94 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC79DE591C30FDA6001C598B;
-			remoteInfo = "NKJMovieComposer-Mac";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		DC0E41491C3149EF0090AC94 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		DC0E414A1C3149EF0090AC94 /* NKJMultiMovieCaptureView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NKJMultiMovieCaptureView.podspec; sourceTree = "<group>"; };
@@ -57,7 +33,6 @@
 		DC0E41651C314D520090AC94 /* NKJMultiMovieCaptureView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NKJMultiMovieCaptureView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0E41671C314D520090AC94 /* NKJMultiMovieCaptureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NKJMultiMovieCaptureView.h; sourceTree = "<group>"; };
 		DC0E41691C314D520090AC94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NKJMovieComposer.xcodeproj; path = Carthage/Checkouts/NKJMovieComposer/NKJMovieComposer.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +56,6 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */,
 				DC0E414F1C314B960090AC94 /* Sources */,
 				DC0E415C1C314C990090AC94 /* NKJMultiMovieCaptureView */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
@@ -151,16 +125,6 @@
 			path = NKJMultiMovieCaptureView;
 			sourceTree = "<group>";
 		};
-		DC0E41761C314E5B0090AC94 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DC0E417C1C314E5B0090AC94 /* NKJMovieComposer.framework */,
-				DC0E417E1C314E5B0090AC94 /* NKJMovieComposerTests.xctest */,
-				DC0E41801C314E5B0090AC94 /* NKJMovieComposer.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -220,42 +184,12 @@
 			mainGroup = 607FACC71AFB9204008FA782;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = DC0E41761C314E5B0090AC94 /* Products */;
-					ProjectRef = DC0E41751C314E5B0090AC94 /* NKJMovieComposer.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				DC0E41641C314D520090AC94 /* NKJMultiMovieCaptureView */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		DC0E417C1C314E5B0090AC94 /* NKJMovieComposer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NKJMovieComposer.framework;
-			remoteRef = DC0E417B1C314E5B0090AC94 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DC0E417E1C314E5B0090AC94 /* NKJMovieComposerTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NKJMovieComposerTests.xctest;
-			remoteRef = DC0E417D1C314E5B0090AC94 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DC0E41801C314E5B0090AC94 /* NKJMovieComposer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NKJMovieComposer.framework;
-			remoteRef = DC0E417F1C314E5B0090AC94 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DC0E41631C314D520090AC94 /* Resources */ = {
