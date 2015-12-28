@@ -1,5 +1,6 @@
 # NKJMultiMovieCaptureView
 
+[![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoapods.org/pods/NKJMultiMovieCaptureView)
 [![License](https://img.shields.io/cocoapods/l/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoapods.org/pods/NKJMultiMovieCaptureView)
 [![Platform](https://img.shields.io/cocoapods/p/NKJMultiMovieCaptureView.svg?style=flat)](http://cocoapods.org/pods/NKJMultiMovieCaptureView)
