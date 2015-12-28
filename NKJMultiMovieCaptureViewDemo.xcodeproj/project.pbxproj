@@ -18,6 +18,9 @@
 		DC0E41881C3151E60090AC94 /* NKJMultiMovieCaptureView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E41821C314ED80090AC94 /* NKJMultiMovieCaptureView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DC0E418B1C31534D0090AC94 /* NKJMovieComposer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E418A1C31534D0090AC94 /* NKJMovieComposer.framework */; };
 		DC0E418C1C31534D0090AC94 /* NKJMovieComposer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E418A1C31534D0090AC94 /* NKJMovieComposer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC0E418E1C3156FD0090AC94 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E418D1C3156FD0090AC94 /* AVFoundation.framework */; };
+		DC0E41901C3157030090AC94 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E418F1C3157030090AC94 /* AssetsLibrary.framework */; };
+		DC0E41921C3157080090AC94 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E41911C3157080090AC94 /* AVKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +50,9 @@
 		DC0E41591C314BEB0090AC94 /* LoadingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		DC0E41821C314ED80090AC94 /* NKJMultiMovieCaptureView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = NKJMultiMovieCaptureView.framework; path = "/Users/nakajijapan/Library/Developer/Xcode/DerivedData/NKJMultiMovieCaptureView-dfrlfidgdodryagdnckvftnxayml/Build/Products/Debug-iphoneos/NKJMultiMovieCaptureView.framework"; sourceTree = "<absolute>"; };
 		DC0E418A1C31534D0090AC94 /* NKJMovieComposer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = NKJMovieComposer.framework; path = "/Users/nakajijapan/Library/Developer/Xcode/DerivedData/NKJMultiMovieCaptureView-dfrlfidgdodryagdnckvftnxayml/Build/Products/Debug-iphoneos/NKJMovieComposer.framework"; sourceTree = "<absolute>"; };
+		DC0E418D1C3156FD0090AC94 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DC0E418F1C3157030090AC94 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		DC0E41911C3157080090AC94 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC0E41921C3157080090AC94 /* AVKit.framework in Frameworks */,
+				DC0E41901C3157030090AC94 /* AssetsLibrary.framework in Frameworks */,
+				DC0E418E1C3156FD0090AC94 /* AVFoundation.framework in Frameworks */,
 				DC0E41871C3151E60090AC94 /* NKJMultiMovieCaptureView.framework in Frameworks */,
 				DC0E418B1C31534D0090AC94 /* NKJMovieComposer.framework in Frameworks */,
 			);
@@ -65,7 +74,6 @@
 		DC0E412B1C3149830090AC94 = {
 			isa = PBXGroup;
 			children = (
-				DC0E418A1C31534D0090AC94 /* NKJMovieComposer.framework */,
 				DC0E41361C3149830090AC94 /* NKJMultiMovieCaptureViewDemo */,
 				DC0E41351C3149830090AC94 /* Products */,
 				DC0E41861C314EEE0090AC94 /* Frameworks */,
@@ -98,6 +106,10 @@
 		DC0E41861C314EEE0090AC94 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC0E418A1C31534D0090AC94 /* NKJMovieComposer.framework */,
+				DC0E41911C3157080090AC94 /* AVKit.framework */,
+				DC0E418F1C3157030090AC94 /* AssetsLibrary.framework */,
+				DC0E418D1C3156FD0090AC94 /* AVFoundation.framework */,
 				DC0E41821C314ED80090AC94 /* NKJMultiMovieCaptureView.framework */,
 			);
 			name = Frameworks;

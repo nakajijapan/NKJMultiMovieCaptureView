@@ -7,11 +7,15 @@
 //
 
 import UIKit
-import MediaPlayer
+//import MediaPlayer
+import AVKit
+import AVFoundation
 
-class ConfirmViewController: UIViewController, MPMediaPickerControllerDelegate {
+class ConfirmViewController: UIViewController, AVPlayerViewControllerDelegate {
 
-    var moviePlayerController:MPMoviePlayerController!
+    
+    var avPlayerViewController:AVPlayerViewController!
+    //var moviePlayerController:MPMoviePlayerController!
     var appDelegate:AppDelegate!
     
     override func viewDidLoad() {
@@ -27,17 +31,13 @@ class ConfirmViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
         
         let movieURL = NSURL(fileURLWithPath: self.appDelegate.composedMoviePath!)
+        self.avPlayerViewController = AVPlayerViewController()
+        self.avPlayerViewController.view.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds))
+        self.avPlayerViewController.player = AVPlayer(URL: movieURL)
+        self.view.addSubview(self.avPlayerViewController.view)
         
-        self.moviePlayerController = MPMoviePlayerController(contentURL: movieURL)
-        self.moviePlayerController.controlStyle = MPMovieControlStyle.Embedded
-        self.moviePlayerController.scalingMode = MPMovieScalingMode.AspectFit
-        
-        self.moviePlayerController.shouldAutoplay = false
-        self.moviePlayerController.view.backgroundColor = UIColor.lightGrayColor()
-        self.moviePlayerController.view.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds))
-        self.moviePlayerController.prepareToPlay()
-        
-        self.view.addSubview(self.moviePlayerController.view)
+        self.avPlayerViewController.player?.play()
+ 
     }
 
 }
