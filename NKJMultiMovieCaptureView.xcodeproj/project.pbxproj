@@ -429,6 +429,7 @@
 				DC0E416C1C314D520090AC94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
