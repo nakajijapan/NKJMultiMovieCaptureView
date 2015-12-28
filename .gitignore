@@ -22,4 +22,4 @@ DerivedData
 Example/Podfile.lock
 Pods
 
-Carthage/
+Carthage/Build
