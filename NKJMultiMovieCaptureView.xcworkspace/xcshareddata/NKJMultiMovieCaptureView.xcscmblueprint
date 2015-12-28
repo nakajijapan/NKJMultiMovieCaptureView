@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2EFE1C2830F98617AA4B66FAC15EC01E06F3D21B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2EFE1C2830F98617AA4B66FAC15EC01E06F3D21B" : 0,
+    "E0BF47E411E90978AE1032EFF17C0799D99610AE" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DD813599-1C5A-4291-B5AA-869F10129784",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2EFE1C2830F98617AA4B66FAC15EC01E06F3D21B" : "NKJMultiMovieCaptureView\/",
+    "E0BF47E411E90978AE1032EFF17C0799D99610AE" : "NKJMultiMovieCaptureView\/Carthage\/Checkouts\/NKJMovieComposer\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "NKJMultiMovieCaptureView",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "NKJMultiMovieCaptureView.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:nakajijapan\/NKJMultiMovieCaptureView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2EFE1C2830F98617AA4B66FAC15EC01E06F3D21B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nakajijapan\/NKJMovieComposer",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E0BF47E411E90978AE1032EFF17C0799D99610AE"
+    }
+  ]
+}
